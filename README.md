@@ -19,8 +19,8 @@ Sigue estos pasos en tu terminal para clonar, configurar y ejecutar el proyecto 
 ### 1. Clonar el Repositorio
 Abre tu terminal dentro de la carpeta raíz de tu servidor local (por ejemplo, `C:/laragon/www/` o `C:/xampp/htdocs/`) y ejecuta:
 ```bash
-git clone [https://github.com/TU_USUARIO/TU_REPOSITORIO.git](https://github.com/TU_USUARIO/TU_REPOSITORIO.git)
-cd TU_REPOSITORIO
+git clone [https://github.com/YaneriPerdomo/challenge-apirest-school.git](https://github.com/YaneriPerdomo/challenge-apirest-school.git)
+cd challenge-apirest-school
 ```
 
 ### 2. Instalar Dependencias
