@@ -36,9 +36,9 @@ class StudentController extends Controller
         $partsOfSearch = explode('[', $searchValue);
         $cleanFilterValue = str_replace(']', '', $partsOfSearch[1]);
         $students = Student::whereLike('name', '%' . trim($cleanFilterValue) . '%')
-            ->orWhere('lastname', 'like','%' . trim($cleanFilterValue) . '%')
-            ->orWhere('identity_document', 'like','%' . trim($cleanFilterValue) . '%')
-            ->orWhere('mother_s_identity_document', 'like','%' . trim($cleanFilterValue) . '%')
+            ->orWhere('lastname', 'like', '%' . trim($cleanFilterValue) . '%')
+            ->orWhere('identity_document', 'like', '%' . trim($cleanFilterValue) . '%')
+            ->orWhere('mother_s_identity_document', 'like', '%' . trim($cleanFilterValue) . '%')
             ->orderBy('created_at', 'desc')->paginate(5);
 
         return view(
@@ -72,7 +72,7 @@ class StudentController extends Controller
             if (empty($request->identity_document)) {
                 $anoNacimiento = date('Y', strtotime($request->birth));
 
-                $student->identity_document = $anoNacimiento . $request->mother_s_identity_document;
+                $student->identity_document = $request->mother_s_identity_document;
             } else {
                 $student->identity_document = $request->identity_document;
             }
@@ -134,7 +134,7 @@ class StudentController extends Controller
         $identityDocumentResolved = $request->identity_document;
         if (empty($identityDocumentResolved)) {
             $anoNacimiento = date('Y', strtotime($request->birth));
-            $identityDocumentResolved = $anoNacimiento . $request->mother_s_identity_document;
+            $identityDocumentResolved = $request->mother_s_identity_document;
         }
 
 
@@ -159,22 +159,18 @@ class StudentController extends Controller
             $student->gender = $request->gender;
             $student->birth = $request->birth;
             $student->mother_s_identity_document = $request->mother_s_identity_document;
-            $student->identity_document = $identityDocumentResolved;
-
-
-
+            $student->identity_document = $request->identity_document;
 
             $combinacion = $request->name . ' ' . $request->lastname . ' ' . $identityDocumentResolved;
             $student->slug = converter_slug($combinacion);
-
 
             $student->save();
 
             DB::commit();
 
-
             $articulo = $request->gender == 'M' ? 'El alumno "' : 'La alumna "';
-            $msg = $articulo . $request->name . ' ' . $request->lastname . '" ha sido actualizado correctamente.';
+            $actualizado_a = $request->gender == 'M' ? '  sido actualizado "' : 'sido actualizada ';
+            $msg = $articulo . $request->name . ' ' . $request->lastname . '" ha ' . $actualizado_a . 'correctamente.';
 
             $request->session()->flash('alert-success', $msg);
 
@@ -313,14 +309,14 @@ class StudentController extends Controller
             return back()->with('alert-danger', 'Ocurrió un error inesperado: ' . $ex->getMessage());
         }
     }
-    public function subjectsUpdate(Request $request, $slug,)
+    public function subjectsUpdate(Request $request, $slug, )
     {
         $student = Student::where('slug', $slug)->first();
 
         if (!$student) {
             return back()->with('alert-danger', 'Sucedio un error: Registro no encontrado');
         }
-        if (!ctype_digit((string)$request->qualification)) {
+        if (!ctype_digit((string) $request->qualification)) {
             return back()->with('alert-danger', 'La calificación debe ser un número entero válido.');
         }
         try {
@@ -384,29 +380,28 @@ class StudentController extends Controller
         try {
             DB::beginTransaction();
 
-            // 1. Buscamos la calificación y su asignatura dentro del bloque seguro
+
             $subject_cali = Qualification::with('Subject')->where('slug', $slug_cali)->first();
 
             if (!$subject_cali) {
                 return back()->with('alert-danger', 'Sucedió un error: El registro de la calificación no existe.');
             }
 
-            // Guardamos el nombre de la materia para el mensaje descriptivo
             $subjectName = $subject_cali->Subject->name ?? 'la asignatura';
 
-            // 2. Ejecutamos la desvinculación/eliminación
+
             $subject_cali->delete();
 
             DB::commit();
 
-            // 3. Redacción del mensaje de éxito dinámico y descriptivo
+
             $article = ($student->gender === 'M') ? 'El alumno' : 'La alumna';
             $gender = $student->gender == 'F' ? 'a' : 'o';
             $msg = "{$article} ha sido retirad\"$gender\" correctamente de la materia \"{$subjectName}\".";
 
             $request->session()->flash('alert-success', $msg);
 
-            // Determinamos la ruta de regreso según tu lógica de género
+
             $routeName = ($student->gender === 'M') ? 'student.subjects-male' : 'student.subjects-female';
             return redirect()->route($routeName, $student->slug);
         } catch (QueryException $ex) {

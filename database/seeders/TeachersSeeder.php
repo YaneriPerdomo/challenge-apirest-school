@@ -41,15 +41,7 @@ class TeachersSeeder extends Seeder
                 'slug'              => 'jose-gregorio-urdaneta-marin-14223564',
                 'created_at'        => now(),
             ],
-            [
-                'identity_document' => 18556231,
-                'subject_id'        => null,
-                'names'             => 'Ana Karina',
-                'lastnames'         => 'Villalobos Ferrer',
-                'gender'            => 'F',
-                'slug'              => 'ana-karina-villalabos-ferrer-18556231',
-                'created_at'        => now(),
-            ],
+
             [
                 'identity_document' => 11223445,
                 'subject_id'        => 4,
@@ -59,15 +51,7 @@ class TeachersSeeder extends Seeder
                 'slug'              => 'luis-alberto-chacin-rincon-11223445',
                 'created_at'        => now(),
             ],
-            [
-                'identity_document' => 20112334,
-                'subject_id'        => null,
-                'names'             => 'Elena del Carmen',
-                'lastnames'         => 'Prieto Rosales',
-                'gender'            => 'F',
-                'slug'              => 'elena-del-carmen-prieto-rosales-20112334',
-                'created_at'        => now(),
-            ],
+
             [
                 'identity_document' => 16778990,
                 'subject_id'        => 5,

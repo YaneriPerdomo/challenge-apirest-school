@@ -110,7 +110,7 @@
                                             <td>{{ $value->lastname }}</td>
                                             <td>
                                                 @if ($value->identity_document)
-                                                    De {{ $value->gender == 'M' ? 'l alumno' : ' la alumna' }}:
+                                                    De{{ $value->gender == 'M' ? 'l alumno' : ' la alumna' }}:
                                                     {{ $value->identity_document }}
                                                 @else
                                                     De la madre: {{ $value->mother_s_identity_document }}

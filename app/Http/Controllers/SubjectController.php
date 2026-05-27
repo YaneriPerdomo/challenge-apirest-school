@@ -87,6 +87,9 @@ class SubjectController extends Controller
     {
         $subject = Subject::where('slug', $slug)->first();
 
+        if (!$subject) {
+            return back()->with('alert-danger', 'Sucedio un error: Registro no encontrado');
+        }
         if (
             Subject::where('name', $request->name)
             ->whereNot('subject_id', $subject->subject_id)->exists()

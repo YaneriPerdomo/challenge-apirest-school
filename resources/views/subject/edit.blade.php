@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/components/quick-access.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/alert.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/pagination.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/form.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.ico') }}">
 

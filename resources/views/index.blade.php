@@ -39,7 +39,7 @@
                     <div class="welcome-note">
                         <h1 class="welcome-note__title fs-4 welcome-note__title--primary primary-text">
                             <b>
-                               <span class="note"> </span> Profesional!
+                               <span class="note"> </span>
                             </b>
                         </h1>
                         <p class="welcome-note__text">

@@ -46,9 +46,11 @@
                             @if ($thereAssociateQualifications == 0)
                                 no se verá afectada ninguna calificación.
                             @else
-                                {{ $thereAssociateQualifications }} calificaciones asociadas a esta materia podrían
-                                verse afectadas.
-                            @endif
+                                {{ $thereAssociateQualifications }}
+                                {{ $thereAssociateQualifications == 1 ?
+                                 'calificación asociada a esta materia podría verse afectada.' :
+                                 'calificaciones asociadas a esta materia podrían verse afectadas.' }}
+                             @endif
                             Además,
                             @if ($thereAssociateProfessor == [])
                                 no se verá afectado a ningun profesor.

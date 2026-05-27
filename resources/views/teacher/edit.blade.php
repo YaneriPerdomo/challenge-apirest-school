@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/components/button.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/quick-access.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/alert.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/pagination.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo.ico') }}">
@@ -44,7 +45,7 @@
                 </legend>
 
                 <div class="row mb-3">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <div class="form__item p-0">
                             <label for="names" class="form__label form__label--required">Nombres</label>
                             <div class="input-group">
@@ -63,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <div class="form__item p-0">
                             <label for="lastnames" class="form__label form__label--required">Apellidos</label>
                             <div class="input-group">
@@ -84,7 +85,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <div class="form__item p-0">
                             <label for="identity_document" class="form__label form__label--required">Cédula de
                                 Identidad</label>
@@ -105,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         <div class="form__item p-0">
                             <label for="gender" class="form__label form__label--required">Género</label>
                             <div class="input-group">

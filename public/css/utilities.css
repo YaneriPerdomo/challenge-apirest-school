@@ -79,7 +79,7 @@
     width: clamp(1200px, 60%, 1500px);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 992px) {
     .module-width {
         /* Ocupa el 92% de la pantalla, adaptándose perfectamente a cualquier celular */
         width: 92%;
@@ -98,3 +98,6 @@
 .text-red {
     color: var(--red-color);
 }
+
+
+

@@ -11,7 +11,7 @@ async function addNoteHTML(label) {
         text = "Buenas noches,  ";
     }
     return (label.innerHTML =
-        "¡" + text + " El sistema escolar está listo para trabajar!");
+        "¡" + text + " usuario! El sistema web escolar está listo para trabajar.");
 }
 let formHeaderNote = document.querySelector(".note");
 console.info(addNoteHTML(formHeaderNote));

@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('student_id')
                 ->nullable()
                 ->constrained('students', 'student_id')
-                ->onDelete('set null');
+                ->cascadeOnDelete();
             $table->foreignId('subject_id')
                 ->nullable()
                 ->constrained('subjects', 'subject_id')
-                ->onDelete('set null');
+                ->cascadeOnDelete();
             $table->integer('qualification')->nullable()->default(null);
             $table->string('slug', 200)->unique();
             $table->timestamps();

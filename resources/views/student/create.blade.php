@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/components/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/search.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/form.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/button.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/quick-access.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components/alert.css') }}">
@@ -38,7 +39,7 @@
                     </legend>
 
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0">
                                 <label for="name" class="form__label form__label--required">Nombres</label>
                                 <div class="input-group">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0">
                                 <label for="lastname" class="form__label form__label--required">Apellidos</label>
                                 <div class="input-group">
@@ -78,7 +79,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0">
                                 <label for="gender" class="form__label form__label--required">Género</label>
                                 <div class="input-group">
@@ -102,7 +103,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0">
                                 <label for="birth" class="form__label form__label--required">Fecha de
                                     Nacimiento</label>
@@ -124,7 +125,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0">
                                 <label for="identity_document" class="form__label">Documento de Identidad del Alumno
                                     (Opcional)</label>
@@ -144,7 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-lg-6 col-12">
                             <div class="form__item p-0" id="wrapper-mother-document">
                                 <label for="mother_s_identity_document" class="form__label"
                                     id="label-mother">Documento de Identidad

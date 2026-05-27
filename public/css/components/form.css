@@ -2,3 +2,9 @@ form__label--required{
     position: relative;
 
 }
+
+@media  screen and (max-width: 992px) {
+    .form__button {
+            justify-content: center !important;
+    }
+}
