@@ -7,7 +7,7 @@ Este repositorio contiene la resolución de la **Prueba Técnica para Desarrolla
 ## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado y configurado uno de los siguientes servidores locales:
-* **Laragon** (Recomendado por su gestión automática de Virtual Hosts)
+* **Laragon**  
 * **XAMPP**
 
 ---
@@ -19,7 +19,8 @@ Sigue estos pasos en tu terminal para clonar, configurar y ejecutar el proyecto 
 ### 1. Clonar el Repositorio
 Abre tu terminal dentro de la carpeta raíz de tu servidor local (por ejemplo, `C:/laragon/www/` o `C:/xampp/htdocs/`) y ejecuta:
 ```bash
-git clone [https://github.com/YaneriPerdomo/challenge-apirest-school.git](https://github.com/YaneriPerdomo/challenge-apirest-school.git)
+git clone https://github.com/YaneriPerdomo/challenge-apirest-school.git
+
 cd challenge-apirest-school
 ```
 
@@ -62,4 +63,10 @@ Esto hará que la API esté disponible en `http://localhost:8000`.
 
 [📥 Descargar Enunciado de la Prueba Técnica (PDF)](public/doc/Challenge_API_Desarrollador.pdf)
 
-Ing. Sistemas | Yaneri Perdomo
+### Diagrama de casos de uso del sistema web
+Sirve para representar las funcionalidades principales del sistema web y sus interacciones con los actores.
+
+![Diagrama de casos de uso](public/doc/diagrama_casos_uso.png)
+
+---
+### Ing. Sistemas | Yaneri Perdomo
