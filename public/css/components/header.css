@@ -1,0 +1,40 @@
+.header__navegation {
+    background: var(--black-color);
+    color: white;
+    padding: 1rem;
+}
+
+.header__content {
+    background: var(--primary-color);
+}
+
+.header__logo-text {
+    background: linear-gradient(
+        90deg,
+        var(--primary-color) 29%,
+        var(--secondary-color) 100%
+    );
+    border-radius: 1rem;
+    padding-right: 0.5rem;
+    color: white;
+}
+
+.header__logo {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.header {
+    background: var(--primary-color);
+}
+
+.header__navigation-bar__link {
+    color: white;
+    text-decoration: none;
+}
+
+.item-selected {
+    background-color: var(--primary-color);
+    padding: 0.25rem;
+    border-radius: 1rem;
+    font-weight: 500;
+}

@@ -1,0 +1,4 @@
+.welcome-box {
+    width: clamp(300px, 50%, 1000px);
+    height: clamp(200px, 50%, 400px);
+}

@@ -1,0 +1,7 @@
+.small {
+    display: none !important;
+}
+
+.bi-caret-down-fill {
+    color: var(--color-azul);
+}

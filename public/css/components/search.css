@@ -1,0 +1,24 @@
+.search {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.search__seeker {
+    width: clamp(340px, 30vh, 200px);
+}
+
+.search__action {
+    align-self: start;
+}
+
+
+
+@media screen and (max-width: 991px) {
+    .search{
+        gap:0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}

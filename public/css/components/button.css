@@ -1,0 +1,39 @@
+.button {
+    padding: 0.5rem 2rem;
+    color: white;
+    border: 0rem;
+
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.primary-button{
+    background:var(--primary-color);
+}
+
+.secondary-button{
+    background: var(--secondary-color);
+}
+
+.black-button{
+    background: var(--black-color);
+}
+
+.green-button{
+    background: var(--green-color);
+}
+
+.red-button {
+    background: var(--red-color);
+}
+
+.grey-button{
+    color: var(--gray-color);
+}
+
+.yellow-button{
+    background: var(--yellow-color);
+}
