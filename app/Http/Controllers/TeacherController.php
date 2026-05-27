@@ -13,6 +13,8 @@ use DB;
 use Exception;
 use Illuminate\Database\QueryException;
 use PDOException;
+use Illuminate\Support\Str;
+
 
 class TeacherController extends Controller
 {
@@ -77,19 +79,22 @@ class TeacherController extends Controller
             $teacher = new Teacher();
             $teacher->names = $request->names;
             $teacher->lastnames = $request->lastnames;
-            $teacher->identity_document = $request->identity_document; // El enunciado pide texto para la cédula del profesor
-            $teacher->subject_id = $request->subject_id; // Guardamos la relación según lo considerado
-
+            $teacher->identity_document = $request->identity_document;
+            $teacher->subject_id = $request->subject_id;
+            $teacher->gender = $request->gender;
             // Generación del slug único combinando Nombre + Apellido + Cédula
             $combinacion = $request->names . '-' . $request->lastnames . '-' . $request->identity_document;
-            $teacher->slug = converter_slug($combinacion);
+            $teacher->slug = Str::slug($combinacion);
 
             $teacher->save();
 
             DB::commit();
 
-            // Mensaje de éxito dinámico y profesional
-            $msg = 'El/La docente "' . $request->name . ' ' . $request->lastname . '" ha sido registrado(a) correctamente junto a su asignatura.';
+
+            $art = $request->gender == 'M' ? 'El profesor' : 'La profesora';
+            $action = $request->gender == 'M' ? 'registrado' : 'registrada';
+
+            $msg = "{$art} \"{$request->names} {$request->lastnames}\" ha sido {$action} correctamente junto a su asignatura.";
             $request->session()->flash('alert-success', $msg);
 
             return redirect()->route('teacher.index');
@@ -122,7 +127,7 @@ class TeacherController extends Controller
         }
 
         $asignaturas = Subject::whereDoesntHave('teacher')
-            ->orWhere('subject_id', $teacher->subject_id) // Mantiene su propia materia en la lista
+            ->orWhere('subject_id', $teacher->subject_id)
             ->select('subject_id', 'name')
             ->orderBy('name', 'asc')
             ->get();
@@ -143,27 +148,25 @@ class TeacherController extends Controller
         try {
             DB::beginTransaction();
 
-            // 1. Buscamos el profesor actual por su slug original
             $teacher = Teacher::where('slug', $slug)->firstOrFail();
 
-            // 2. Asignamos los nuevos valores desde el request
             $teacher->names = $request->names;
             $teacher->lastnames = $request->lastnames;
             $teacher->identity_document = $request->identity_document;
             $teacher->subject_id = $request->subject_id;
-            $teacher->gender = $request->gender; // Incluido ya que está en el formulario de edición
+            $teacher->gender = $request->gender;
 
-            // 3. Regeneramos el slug único con los nuevos datos modificados
             $combinacion = $request->names . '-' . $request->lastnames . '-' . $request->identity_document;
-            $teacher->slug = converter_slug($combinacion);
+            $teacher->slug = Str::slug($combinacion);
 
             $teacher->save();
 
             DB::commit();
 
-            // 4. Mensaje de éxito dinámico usando las variables correctas en plural
-            $articulo = $request->gender == 'M' ? 'El profesor "' : 'La profesora "';
-            $msg = $articulo . $request->names . ' ' . $request->lastnames . '" ha sido actualizado(a) correctamente.';
+             $art = $request->gender == 'M' ? 'El profesor' : 'La profesora';
+            $action = $request->gender == 'M' ? 'actualizado' : 'actualizada';
+
+            $msg = "{$art} \"{$request->names} {$request->lastnames}\" ha sido {$action} correctamente junto a su asignatura.";
 
             $request->session()->flash('alert-success', $msg);
 
@@ -215,11 +218,14 @@ class TeacherController extends Controller
             $request->session()->flash('alert-success', $msg);
             return redirect()->route('teacher.index');
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al eliminar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 }

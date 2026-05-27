@@ -133,11 +133,11 @@
                                             </td>
 
                                             <td>
-                                                {{ formatting_date_h($value->created_at) }}
+                                                {{ \Carbon\Carbon::parse($value->created_at)->format('d/m/Y g:i a') }}
 
                                             </td>
                                             <td>
-                                                {{ formatting_date_h($value->updated_at) }}
+                                                {{ \Carbon\Carbon::parse($value->updated_at)->format('d/m/Y g:i a') }}
 
                                             </td>
                                             <td class='table__operations'>

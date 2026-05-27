@@ -11,6 +11,8 @@ use Exception;
 use Illuminate\Database\QueryException;
 use PDOException;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Str;
+
 
 class SubjectController extends Controller
 {
@@ -52,7 +54,7 @@ class SubjectController extends Controller
     {
         try {
             DB::beginTransaction();
-            $slug =  converter_slug($request->name);
+            $slug =  Str::slug($request->name);
             $insert_brand = new Subject();
             $insert_brand->slug = $slug;
             $insert_brand->name = $request->name;
@@ -64,11 +66,14 @@ class SubjectController extends Controller
 
             return redirect()->route('subject.index');
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al registrar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 
@@ -107,7 +112,7 @@ class SubjectController extends Controller
 
         try {
             DB::beginTransaction();
-            $slug =  converter_slug($request->name);
+            $slug =  Str::slug($request->name);
             $insert_brand = Subject::where('slug', $request->slug)->first();
             $insert_brand->slug = $slug;
             $insert_brand->name = $request->name;
@@ -118,11 +123,14 @@ class SubjectController extends Controller
             $request->session()->flash('alert-success', $msg);
             return redirect()->route('subject.index');
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al actualizar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 
@@ -174,11 +182,14 @@ class SubjectController extends Controller
             $request->session()->flash('alert-success', $msg);
             return redirect()->route('subject.index');
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al eliminar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 }

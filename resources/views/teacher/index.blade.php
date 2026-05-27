@@ -106,7 +106,7 @@
                                             <td>{{ $value->identity_document }}</td>
                                             <td>{{ $value->subject->name ?? 'Ninguna asignada' }}</td>
                                             <td>
-                                                {{ formatting_date($value->created_at) }}
+                                                {{ \Carbon\Carbon::parse($value->created_at)->format('d/m/Y') }}
 
                                             </td>
                                             <td class='table__operations'>

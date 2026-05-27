@@ -117,11 +117,14 @@
                                                 @endif
 
                                             </td>
-                                            <td> {{ formatting_date($value->birth) }} </td>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($value->birth)->format('d/m/Y') }}
+
+                                                 </td>
                                             <td>{{ \Carbon\Carbon::parse($value->birth)->age }}
                                                 año{{ \Carbon\Carbon::parse($value->birth)->age > 1 ? 's' : '' }}</td>
                                             <td>
-                                                {{ formatting_date($value->created_at) }}
+                                                {{ \Carbon\Carbon::parse($value->created_at)->format('d/m/Y') }}
 
                                             </td>
                                             <td class='table__operations'>

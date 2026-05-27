@@ -14,7 +14,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use PDOException;
 use PhpParser\Node\Stmt\Return_;
-
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -82,7 +82,7 @@ class StudentController extends Controller
 
 
             $combinacion = $request->name . ' ' . $request->lastname . ' ' . $student->identity_document;
-            $student->slug = converter_slug($combinacion);
+            $student->slug = Str::slug($combinacion);
 
 
             $student->save();
@@ -162,7 +162,7 @@ class StudentController extends Controller
             $student->identity_document = $request->identity_document;
 
             $combinacion = $request->name . ' ' . $request->lastname . ' ' . $identityDocumentResolved;
-            $student->slug = converter_slug($combinacion);
+            $student->slug = Str::slug($combinacion);
 
             $student->save();
 
@@ -217,11 +217,14 @@ class StudentController extends Controller
             $request->session()->flash('alert-success', $msg);
             return redirect()->route('student.index');
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al eliminar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 
@@ -290,7 +293,7 @@ class StudentController extends Controller
             $qualification->qualification = Null;
 
 
-            $qualification->slug = converter_slug($student->slug . ' ' . $qualification->subject->name);
+            $qualification->slug = Str::slug($student->slug . ' ' . $qualification->subject->name);
 
 
 
@@ -309,7 +312,7 @@ class StudentController extends Controller
             return back()->with('alert-danger', 'Ocurrió un error inesperado: ' . $ex->getMessage());
         }
     }
-    public function subjectsUpdate(Request $request, $slug, )
+    public function subjectsUpdate(Request $request, $slug,)
     {
         $student = Student::where('slug', $slug)->first();
 
@@ -343,11 +346,14 @@ class StudentController extends Controller
                 : 'student.subjects-female';
             return redirect()->route($routeName, ['slug' => $student->slug]);
         } catch (QueryException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de base de datos al actualizar: ' . $ex->getMessage());
         } catch (PDOException $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error de conexión: ' . $ex->getMessage());
         } catch (Exception $ex) {
-            echo $ex->getMessage() . ' ' . $ex->getLine();
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('alert-danger', 'Error inesperado: ' . $ex->getMessage());
         }
     }
 
