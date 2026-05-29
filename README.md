@@ -2,6 +2,9 @@
 
 Este repositorio contiene la resolución de la **Prueba Técnica para Desarrollador Backend**, consistente en una API RESTful desarrollada con **Laravel** y **MySQL** para la administración de alumnos, asignaturas, profesores y calificaciones.
 
+### 🌐 Proyecto en Hosting (Producción)
+[Challenge Api | Inicio](https://challenge-api-yp.infinityfree.me/inicio)
+
 ---
 
 ## Requisitos Previos
